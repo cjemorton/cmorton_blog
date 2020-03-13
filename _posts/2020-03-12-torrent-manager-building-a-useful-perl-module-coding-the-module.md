@@ -227,9 +227,61 @@ The reasons why I chose it were.
 - `rt` stands for rT(orrent), and `mgr` stands for Manager. As this is a type of manager for rTorrent.
 - The `Gen` part of the namespace looks generating Database files.
 
-All these pieces might change up as I work on the functionality of the module. This is however a starting point for now.
+All these pieces might change up as I work on the functionality of the module. This is a starting point.
 
 ---
+With my namespace in hand I need to genrate a skeleton for my perl module.
+
+{% highlight perl %}
+module-starter --module=Rtmgr::Gen::Db \
+    --author="Clem Morton" --email=clem@cpan.org
+{% endhighlight %}
+
+Should build up a skeleton module nicely!
+
+Also its a good idea to put the source code under version controll I will start tracking the module in git with these commands:
+
+{% highlight perl %}
+git init
+git add .
+git commit -a
+git remote add origin git@github.com:clem16/pm-rtmgr.git
+git push -u origin master
+{% endhighlight %}
+
+
+---
+
+In the `lib/Rtmgr/Gen/` folder of the project. There will be a Db.pm file created.
+This is where I will be placing my code.
+
+ - The latest source code of this module can be viewed on [GitHub][Db.pm]
+
+It should be fairly self documenting.
+
+---
+This amazing article has information on building and publishing a module on cpan. You can find it [here][how-to-upload-to-cpan].
+
+When its time to publish to cpan.
+- The source docs for git commands and tags is [here][git-basics-tagging]
+- The source docs for uploading to cpan is found [here][how-to-upload-to-cpan]
+- You will need CPAN::Uploader so run `sudo cpan install CPAN::Uploader`
+
+{% highlight perl %}
+git add .
+git commit -a
+git tag -a v0.01 -m "First Release 0.01"
+git push
+git push origin --tags
+
+perl Makefile.PL
+make manifest
+make
+make install
+make dist
+cpan-upload -u clem Rtmgr-Gen-Db-0.01.tar.gz
+make clean
+{% endhighlight %} 
 
 
 [linux-journal-1381]: https://www.linuxjournal.com/article/1381
@@ -239,3 +291,6 @@ All these pieces might change up as I work on the functionality of the module. T
 [rpc-setup-xmlrpc]: https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC
 [rtorrent-xmlrpc-reference]: https://mdevaev.github.io/emonoda/rTorrent-XMLRPC-Reference/
 [gi-torrent]: https://code.google.com/p/gi-torrent
+[Db.pm]: https://github.com/clem16/pm-rtmgr/blob/master/Rtmgr-Gen-Db/lib/Rtmgr/Gen/Db.pm
+[how-to-upload-to-cpan]: https://www.perl.com/article/how-to-upload-a-script-to-cpan/
+[git-basics-tagging]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
