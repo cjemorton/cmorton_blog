@@ -221,7 +221,16 @@ untie(%hash_name_db);
 ---
 Now comes the hardest part. Deciding on a name for this perl module to include it in cpan.
 
-I will leave that for the next blog post.
+The name that I settled on is: `Rtmgr::Gen::Db` as to if that's a "good name" i'm not sure.
+The reasons why I chose it were.
+- Its namespace that's not already used.
+- `rt` stands for rT(orrent), and `mgr` stands for Manager. As this is a type of manager for rTorrent.
+- The `Gen` part of the namespace looks generating Database files.
+
+All these pieces might change up as I work on the functionality of the module. This is however a starting point for now.
+
+---
+
 
 [linux-journal-1381]: https://www.linuxjournal.com/article/1381
 [rakshasa-rtorrent]: https://github.com/rakshasa/rtorrent
