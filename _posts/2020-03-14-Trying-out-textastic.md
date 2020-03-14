@@ -12,9 +12,4 @@ I just figured out I can use textastic to write blog posts on my iPhone.
 
 I guess I need to memorize some more markdown.
 
-<<<<<<< HEAD
-
-This should show me the signing key from my laptop on this commit. I hope.
-=======
-Figured I'd try and see if this change and commit would get signed and verified.
->>>>>>> d78627d1cb01a08c2edc4e88b31829609608d736
+This is a new commit to see if I can get the signature to work.
