@@ -14,3 +14,12 @@ The goal is to have it available on cpan for any computer with Perl to be able t
 ---
 
 Anyways. Fun continues!
+
+---
+List of useful articles I've been using as resources.
+
+[Perl Modules Versioning][perl-modules-version]
+
+
+
+[perl-modules-version]: https://www.perl.com/article/1/2013/3/24/3-quick-ways-to-find-out-the-version-number-of-an-installed-Perl-module-from-the-terminal/
