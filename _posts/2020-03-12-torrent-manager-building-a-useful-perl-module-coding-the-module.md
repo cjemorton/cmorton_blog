@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Torrent Manager :: Building a useful perl module :: Coding the Module!"
+title:  "Torrent Manager :: Building a useful Perl module :: Coding the Module!"
 date:   2020-03-12 10:52:59 -0700
 categories: jekyll update
 ---
