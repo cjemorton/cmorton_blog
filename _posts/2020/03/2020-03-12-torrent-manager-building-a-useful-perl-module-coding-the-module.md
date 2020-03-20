@@ -284,6 +284,13 @@ cpan-upload -u clem Rtmgr-Gen-Db-0.01.tar.gz
 make clean
 {% endhighlight %}
 
+---
+
+As of March 20, 2020 : There is a version of this up on CPAN. `cpan install Rtmgr`
+- The repository is tracked and maintained here: [Rtmgr][pm-rtmgr] it has all the latest changes.
+- Release tags on GitHub correspond to releases pushed up to CPAN.
+- As I use and develop the module, I will continue to update the GitHub and CPAN Versions.
+- The module might undergo a complete rewrite again. I continue to find and fix things - and add new feature.
 
 [linux-journal-1381]: https://www.linuxjournal.com/article/1381
 [rakshasa-rtorrent]: https://github.com/rakshasa/rtorrent
@@ -295,3 +302,4 @@ make clean
 [Db.pm]: https://github.com/clem16/pm-rtmgr/blob/master/Rtmgr-Gen-Db/lib/Rtmgr/Gen/Db.pm
 [how-to-upload-to-cpan]: https://www.perl.com/article/how-to-upload-a-script-to-cpan/
 [git-basics-tagging]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
+[pm-rtmgr]: https://github.com/clem16/pm-rtmgr
