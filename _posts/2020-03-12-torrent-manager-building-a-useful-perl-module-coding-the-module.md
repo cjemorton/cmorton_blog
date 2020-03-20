@@ -4,9 +4,9 @@ title:  "Torrent Manager :: Building a useful perl module :: Coding the Module!"
 date:   2020-03-12 10:52:59 -0700
 categories: jekyll update
 ---
-Recently I've been throwing together some perl code to help manage and run query's on my [rtorrent][rakshasa-rtorrent] installation.
+Recently I've been throwing together some Perl code to help manage and run query's on my [rtorrent][rakshasa-rtorrent] installation.
 
-I'll try to document the steps here in a series of blog posts. This post is for my own use, and may be lacking in clarity in some places. 
+I'll try to document the steps here in a series of blog posts. This post is for my own use, and may be lacking in clarity in some places.
 
 NOTE: These scripts and code snippets are not a "complete project". They are probably not what your looking for.
 If you do happen to find pieces here and there useful. That's awesome! Have fun!
@@ -15,10 +15,10 @@ If you do happen to find pieces here and there useful. That's awesome! Have fun!
 - [ruTorrent][novik-rutorrent] is the web frontend for rtorrent.
 
 
-To get my perl scripts talking to rTorrent/ruTorrent XML-RPC communication is needed. 
+To get my Perl scripts talking to rTorrent/ruTorrent XML-RPC communication is needed.
 To accomplished this the Perl module [XML::RPC][xml-rpc] is used. It provides simple "Pure Perl" methods for XML::RPC communication.
 
-Assuming perl and cpan are setup.
+Assuming Perl and cpan are setup.
 {% highlight bash %}
 sudo cpan install XML::RPC Data::Dumper
 {% endhighlight %}
@@ -54,11 +54,11 @@ my $port = $ARGV[3]; # Port
 my $endp = $ARGV[4]; # Endpoint.
 {% endhighlight %}
 
-From here each variable can be used in a script. 
-(Technically each $ARGV[] variable can be used as well. I've written it out here for clarity.) 
+From here each variable can be used in a script.
+(Technically each $ARGV[] variable can be used as well. I've written it out here for clarity.)
 I have included an alternative to clean up and minimize code clutter.
 
-The string that is used to genearate a useable "url" is:
+The string that is used to generate a useable "URL" is:
 
 {% highlight bash %}
 "https://$user\:$pass\@$host\:$port\/$endp"
@@ -81,7 +81,7 @@ my $xmlrpc = XML::RPC->new("https://$ARGV[0]\:$ARGV[1]\@$ARGV[2]\:$ARGV[3]\/$ARG
 Now that we can communicate with rtorrent. We need to know what say, and what to ask it.
 Here we build on the wonderful work done by the github user `mdevaev` on the project `emonoda`. - Which they picked up from [gi-torrent]
 
-They have done a wonderful job documenting and compiling it into a nice format for me to easilly read. 
+They have done a wonderful job documenting and compiling it into a nice format for me to easily read.
 
 Reference:
 
@@ -100,7 +100,7 @@ my $dl_list = $xmlrpc->call( 'download_list' );
 ---
 From here the script will connect to the server and get the hashes of all the torrents.
 
-Now I have chosen to setup a foreach loop to loop over all the results returned from the call and get the name of the torrent associated with it.
+Now I have chosen to setup a for each loop to loop over all the results returned from the call and get the name of the torrent associated with it.
 {% highlight perl %}
 foreach my $i () {
 //get the name of the torrent from the server.//
@@ -168,18 +168,18 @@ foreach my $i (@{ $dl_list}) {
 }
 {% endhighlight %}
 
-* Theres a few print statements thrown in just for clarity on what's going on.
+* There's a few print statements thrown in just for clarity on what's going on.
 
 ---
 
-All thats left is to call the database, sort it and print it out.
+All that's left is to call the database, sort it and print it out.
 
 That can be done with this snip of code:
 
 {% highlight perl %}
 foreach (sort keys %hash_name_db) {
-    print "$_ : $hash_name_db{$_}\n";
-}
+    print "$_ : $hash_name_db{ $_ }\n";
+  }
 {% endhighlight %}
 
 Don't forget to close the file afterwards with:
@@ -193,6 +193,7 @@ untie(%hash_name_db);
 The full functional script with no frills.:
 
 {% highlight perl %}
+
 #!/usr/bin/perl
 # https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC
 # https://mdevaev.github.io/emonoda/rTorrent-XMLRPC-Reference/
@@ -213,15 +214,15 @@ foreach my $i (@{ $dl_list}) {
         $hash_name_db{"$i"} = $name;
 }
 foreach (sort keys %hash_name_db) {
-    print "$_ : $hash_name_db{$_}\n";
+    print "$_ : $hash_name_db{ $_ }\n";
 }
 untie(%hash_name_db);
 {% endhighlight %}
 
 ---
-Now comes the hardest part. Deciding on a name for this perl module to include it in cpan.
+Now comes the hardest part. Deciding on a name for this Perl module to include it in cpan.
 
-The name that I settled on is: `Rtmgr::Gen::Db` as to if that's a "good name" i'm not sure.
+The name that I settled on is: `Rtmgr::Gen::Db` as to if that's a "good name" I'm not sure.
 The reasons why I chose it were.
 - Its namespace that's not already used.
 - `rt` stands for rT(orrent), and `mgr` stands for Manager. As this is a type of manager for rTorrent.
@@ -230,7 +231,7 @@ The reasons why I chose it were.
 All these pieces might change up as I work on the functionality of the module. This is a starting point.
 
 ---
-With my namespace in hand I need to genrate a skeleton for my perl module.
+With my namespace in hand I need to generate a skeleton for my Perl module.
 
 {% highlight perl %}
 module-starter --module=Rtmgr::Gen::Db \
@@ -239,7 +240,7 @@ module-starter --module=Rtmgr::Gen::Db \
 
 Should build up a skeleton module nicely!
 
-Also its a good idea to put the source code under version controll I will start tracking the module in git with these commands:
+Also its a good idea to put the source code under version control I will start tracking the module in git with these commands:
 
 {% highlight perl %}
 git init
@@ -281,7 +282,7 @@ make install
 make dist
 cpan-upload -u clem Rtmgr-Gen-Db-0.01.tar.gz
 make clean
-{% endhighlight %} 
+{% endhighlight %}
 
 
 [linux-journal-1381]: https://www.linuxjournal.com/article/1381
