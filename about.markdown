@@ -19,6 +19,6 @@ If you need a VPS checkout these providers:
 
 ---
 
-[GitHub]: https://github.com/clem16
+[GitHub]: https://github.com/cjemorton
 [VPS-ENGLISH]: https://www.first-root.com/?aid=cb7dd8480b5c
 [VPS-GERMAN]: https://www.first-root.de?aid=cb7dd8480b5c
