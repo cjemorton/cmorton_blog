@@ -8,8 +8,7 @@ categories: jekyll update
 - Plex reports a new versions of the server. The FreeBSD port maintainer has not updated the port yet.
   - Eventually I'd like to be able to submit patches to help out. But for now; I whipped up a script to do it for me privately.
   - This is by no means the best solution, it's just how I've chosen to do it until I figure out the "proper way", I am certain it is by no means the only way to solve the problem.
-  - This post serves to document my quick scratch program; the thought processes behind it (to better understand what I did, and what materials I referenced), so I can make changes in the future and make it better. This is just the initial version, there are already changes I am planning on doing as this script makes a lot of assumptions about its environment.
-    - I plan to place this whole project in a GitHub Repository.
+  - This post serves to document my quick scratch program; the thought processes behind it (to better understand what I did, and what materials I referenced), so I can make changes in the future and make it better. This is just the initial version, there are already changes I am planning on doing as this script makes a lot of assumptions about its environment. *I plan to place this whole project in a GitHub Repository*
 ---
 
 ### API Call: To Tautilli - get plex version.
@@ -49,6 +48,11 @@ categories: jekyll update
       - `version=$(echo $json | jq '.response.data | {version}' | jq '.version' | xargs)`
     - `release_date` - The release date.
       -  `timestamp=$(echo $json | jq '.response.data | {release_date}' | jq '.release_date' | xargs)`
+  - Another bit of information needed is the version prefix and suffix, this can be generated from the version string by splitting it in half using the '-' as a delimitator and storing each in its own variables for ease of use later.
+    - `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)` For the version prefix.
+    - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)` For the version suffix.
+---
+### Conditional 'if' statement: Further control logic.
 
 
  [jq]: https://stedolan.github.io/jq/
