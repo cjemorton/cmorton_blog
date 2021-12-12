@@ -92,7 +92,6 @@ fi
 
 - The use of `aria2c` can be toggled on and off in this script by removing the #, doing so lets me resume broken downloads. Plex servers are usually slow.
 - `make makesum` needs to be run to generate the file checksums. It will actually check and download the file if it's not present in the $distfiles directory.
-
 - If your plex server is running inside of a jail managed by `cbsd`, you can run these commands to kick off the build using `synth`.
   -
 ```
