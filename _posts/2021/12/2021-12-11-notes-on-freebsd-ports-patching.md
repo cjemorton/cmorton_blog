@@ -8,7 +8,7 @@ categories: jekyll update
 - Plex reports a new versions of the server; but the port maintainer in FreeBSD have not updated the port.
   - Eventually I'd like to be able to submit patches to help out. But for now; I whipped up a script to do it for me privately.
   - This is by no means the best solution, it's just how I've chosen to do it until I figure out the "proper way", I am certain it is by no means the only way to solve the problem.
-  - This post serves to document my quick scratch program; the thought processes behind it (to better understand what I did, and what materials I referenced), so I can make changes in the future and make it better
+  - This post serves to document my quick scratch program; the thought processes behind it (to better understand what I did, and what materials I referenced), so I can make changes in the future and make it better. This is just the initial version, there are already changes I am planning on doing. - I plan to place this whole project in a GitHub Repository.
 ---
 
 
@@ -34,9 +34,23 @@ categories: jekyll update
   - *NOTE: Remember to replace the settings with your own*
 
 - Make the call to the API endpoint using curl, set it as a variable 'json'.
- - `json=$(curl -s -X GET "http://$url:$port/api/v2?apikey=$apikey&cmd=$cmd")`
+  - `json=$(curl -s -X GET "http://$url:$port/api/v2?apikey=$apikey&cmd=$cmd")`
+- The response comes back from the API endpoint as json. It now needs to be parsed for the information needed.
+- This can be done by piping the JSON through [jq] a 'Command-line JSON processor' (according to it's manual page).
+  - The pieces of information I need to get and set as variables in my script are as follows.
+    - The full call I use is listed, these may need to be tweaked.
+
+    *(NOTE: I'm using xargs to make sure there's no junk or newline characters, etc floating around - probably not needed but in a quick and dirty script like this it eliminates points of failure. Then it can be optimized.)*
+    - `update_available'` - Which is a true or false value.
+      - `update_available=$(echo $json | jq '.response.data | {update_available}' | jq '.update_available')`
+    - `download_url` - The URL the new file is located.
+      - `download_url=$(echo $json | jq '.response.data | {download_url}' | jq '.download_url' | xargs)`
+    - `version` - The version number separated by a '-' a 'prefix' and a 'suffix'.
+      - `version=$(echo $json | jq '.response.data | {version}' | jq '.version' | xargs)`
+    - `release_date` - The release date.
+      -  `timestamp=$(echo $json | jq '.response.data | {release_date}' | jq '.release_date' | xargs)`
 
 
-
+ [jq]: https://stedolan.github.io/jq/
 [Tautulli]: https://tautulli.com/
 [Tautulli-API-Reference]: https://github.com/Tautulli/Tautulli/wiki/Tautulli-API-Reference
