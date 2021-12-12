@@ -57,11 +57,10 @@ categories: jekyll update
     - `release_date` - The release date.
       -  `timestamp=$(echo $json | jq '.response.data | {release_date}' | jq '.release_date' | xargs)`
   - Another bit of information needed is the version prefix and suffix, this can be generated from the version string by splitting it in half using the '-' as a delimitator and storing each in its own variables for ease of use later.
-    - `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)` For the version prefix.
-    - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)` For the version suffix.
+    - `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)` : For the version prefix.
+    - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)` : For the version suffix.
 ---
 ### A quick and dirty copy of the remainder of the script.
-
 ```
 if [ "$update_available" == 'true' ]
 then
@@ -87,13 +86,13 @@ fi
 else
         echo "Plex is running $version, no update needed."
 fi
+---
 ```
 - *NOTE: This script may not be the latest version and is here just as a reference. Check out my GitHub for full version.*
-
+---
 - The use of `aria2c` can be toggled on and off in this script by removing the #, doing so lets me resume broken downloads. Plex servers are usually slow.
 - `make makesum` needs to be run to generate the file checksums. It will actually check and download the file if it's not present in the $distfiles directory.
 - If your plex server is running inside of a jail managed by `cbsd`, you can run these commands to kick off the build using `synth`.
-  -
 ```
 cbsd jexec jname=plex synth install multimedia/plexmediaserver-plexpass
 cbsd jexec jname=plex service plexmediaserver_plexpass status
