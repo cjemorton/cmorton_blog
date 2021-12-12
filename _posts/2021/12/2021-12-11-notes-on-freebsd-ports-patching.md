@@ -5,12 +5,12 @@ date:   2021-12-11 17:00:03 -0700
 categories: jekyll update
 ---
 ### The Issue.
-Plex reports a new versions of the server, but the port maintainer in FreeBSD have not updated the port.
+- Plex reports a new versions of the server, but the port maintainer in FreeBSD have not updated the port.
 
-Eventually I'd like to be able to submit patches to help out. But for now; I whipped up a script to do it for me.
+- Eventually I'd like to be able to submit patches to help out. But for now; I whipped up a script to do it for me.
 
-This is by no means the best solution, it's just how I've chosen to do it until I figure out the "proper way", it is by no means the only way to solve the problem.
-
+- This is by no means the best solution, it's just how I've chosen to do it until I figure out the "proper way", it is by no means the only way to solve the problem.
+---
 This post serves to document my quick scratch program; the thought processes behind it (to better understand what I did, and what materials I referenced), so I can make changes in the future and make it better.
 ---
 ### **API Call to Tautilli to get plex version.**
