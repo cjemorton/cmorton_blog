@@ -60,10 +60,8 @@ categories: jekyll update
     - `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)`
     - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)`
   - That's all the information needed collected into variable and ready to be used in the rest of the script.
----
-- A quick and dirty copy of the remainder of the script can be found in this gist: [plex-ports-patch-dirty-logic].
----
-- *NOTE: This script may not be the latest version and is here just as a reference. Check out my GitHub for full version.*
+  - A quick and dirty copy of the remainder of the script can be found in this gist: [plex-ports-patch-dirty-logic].
+  - *NOTE: This script may not be the latest version and is here just as a reference. Check out my GitHub for full version.*
 ---
 - The use of `aria2c` can be toggled on and off in this script by removing the #, doing so lets me resume broken downloads. Plex servers are usually slow.
 - `make makesum` needs to be run to generate the file checksums. It will actually check and download the file if it's not present in the $distfiles directory.
