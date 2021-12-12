@@ -11,7 +11,7 @@ categories: jekyll update
   - This post serves to document my quick scratch program; the thought processes behind it (to better understand what I did, and what materials I referenced), so I can make changes in the future and make it better. This is just the initial version, there are already changes I am planning on doing as this script makes a lot of assumptions about its environment.
 
   *NOTE: I plan to place this whole project in a GitHub Repository*
-  
+
 ---
 
 ### API Call: To Tautilli - get plex version.
@@ -22,18 +22,23 @@ categories: jekyll update
  - The script is written in `/usr/bin/env sh` the default shell on Freebsd. I'm sure it could be ported to many other languages.
 
 
-- *Set Script Variables.*
+- *Set Script Variables -> place in `settings.conf`*
   - ```
- # API Endpoint settings.
- apikey=key
- cmd=get_pms_update
- url=IPADDRESS
- port=8181
- distfiles=/usr/ports/distfiles
- ports_dir=/usr/ports/multimedia/plexmediaserver-plexpass
- email=your@email.address
+  apikey=yourAPIKEYtoTautulli
+  cmd=get_pms_update
+  url=172.16.0.1
+  port=8181
+  distfiles=/usr/ports/distfiles
+  ports_dir=/usr/ports/multimedia/plexmediaserver-plexpass
+  email=youremail@gmail.com
+  name=yourname
  ```
   - *NOTE: Remember to replace the settings with your own*
+
+- These variables are set at runtime from a `settings.conf`, and the script is executed by setting an alias in `~/.cshrc` or run directly.
+  - ```
+  alias ppp       'env `cat /root/plex-ports-patch/settings.conf` /bin/sh /root/plex-ports-patch/plex-patch.sh'
+  ```
 
 - Make the call to the API endpoint using curl, set it as a variable 'json'.
   - `json=$(curl -s -X GET "http://$url:$port/api/v2?apikey=$apikey&cmd=$cmd")`
@@ -55,8 +60,48 @@ categories: jekyll update
     - `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)` For the version prefix.
     - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)` For the version suffix.
 ---
-### Conditional 'if' statement: Further control logic.
+### A quick and dirty copy of the remainder of the script.
 
+```
+if [ "$update_available" == 'true' ]
+then
+
+# Makefile Changes
+if [ -e $ports_dir/Makefile ]
+then
+echo "Makefile exists, creating backup."
+cp $ports_dir/Makefile $ports_dir/Makefile.orig
+
+        sed -e "s/Created by.*/Created by: $name <$email>/g" \
+        -e "s/PORTVERSION=.*/PORTVERSION=\t"$version_prefix"/g" \
+        -e "s/DISTVERSIONSUFFIX=.*/DISTVERSIONSUFFIX="$version_suffix"/g" \
+        -e "s/MAINTAINER=.*/MAINTAINER=\t"$email"/g" $ports_dir/Makefile > $ports_dir/Makefile.new
+
+        mv $ports_dir/Makefile.new $ports_dir/Makefile
+fi
+# Generate distinfo
+
+        # aria2c multi threads and connections.
+#       aria2c -s16 -x16 --dir=$distfiles -c $download_url
+        cd $ports_dir && make makesum
+else
+        echo "Plex is running $version, no update needed."
+fi
+```
+- *NOTE: This script may not be the latest version and is here just as a reference. Check out my GitHub for full version.*
+
+- The use of `aria2c` can be toggled on and off in this script by removing the #, doing so lets me resume broken downloads. Plex servers are usually slow.
+- `make makesum` needs to be run to generate the file checksums. It will actually check and download the file if it's not present in the $distfiles directory.
+
+- If your plex server is running inside of a jail managed by `cbsd`, you can run these commands to kick off the build using `synth`.
+  -
+```
+cbsd jexec jname=plex synth install multimedia/plexmediaserver-plexpass
+cbsd jexec jname=plex service plexmediaserver_plexpass status
+cbsd jexec jname=plex service plexmediaserver_plexpass stop
+cbsd jexec jname=plex service plexmediaserver_plexpass start
+cbsd jexec jname=plex service plexmediaserver_plexpass status
+```
 
  [jq]: https://stedolan.github.io/jq/
 [Tautulli]: https://tautulli.com/
