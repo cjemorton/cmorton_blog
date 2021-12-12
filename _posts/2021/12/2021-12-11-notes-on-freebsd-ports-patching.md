@@ -87,8 +87,8 @@ fi
 else
         echo "Plex is running $version, no update needed."
 fi
----
 ```
+---
 - *NOTE: This script may not be the latest version and is here just as a reference. Check out my GitHub for full version.*
 ---
 - The use of `aria2c` can be toggled on and off in this script by removing the #, doing so lets me resume broken downloads. Plex servers are usually slow.
