@@ -61,33 +61,7 @@ categories: jekyll update
     - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)`
   - Thats all the information needed collected into variable and ready to be used in the rest of the script.
 ---
-### A quick and dirty copy of the remainder of the script.
-```
-if [ "$update_available" == 'true' ]
-then
-
-# Makefile Changes
-if [ -e $ports_dir/Makefile ]
-then
-echo "Makefile exists, creating backup."
-cp $ports_dir/Makefile $ports_dir/Makefile.orig
-
-        sed -e "s/Created by.*/Created by: $name <$email>/g" \
-        -e "s/PORTVERSION=.*/PORTVERSION=\t"$version_prefix"/g" \
-        -e "s/DISTVERSIONSUFFIX=.*/DISTVERSIONSUFFIX="$version_suffix"/g" \
-        -e "s/MAINTAINER=.*/MAINTAINER=\t"$email"/g" $ports_dir/Makefile > $ports_dir/Makefile.new
-
-        mv $ports_dir/Makefile.new $ports_dir/Makefile
-fi
-# Generate distinfo
-
-        # aria2c multi threads and connections.
-#       aria2c -s16 -x16 --dir=$distfiles -c $download_url
-        cd $ports_dir && make makesum
-else
-        echo "Plex is running $version, no update needed."
-fi
-```
+- A quick and dirty copy of the remainder of the script can be found in this gist: [plex-ports-patch-dirty-logic].
 ---
 - *NOTE: This script may not be the latest version and is here just as a reference. Check out my GitHub for full version.*
 ---
@@ -102,6 +76,7 @@ cbsd jexec jname=plex service plexmediaserver_plexpass start
 cbsd jexec jname=plex service plexmediaserver_plexpass status
 ```
 
- [jq]: https://stedolan.github.io/jq/
+[jq]: https://stedolan.github.io/jq/
+[plex-ports-patch-dirty-logic]: https://gist.github.com/cjemorton/a5332b6b6e71b4806a01bb63d39a0d29
 [Tautulli]: https://tautulli.com/
 [Tautulli-API-Reference]: https://github.com/Tautulli/Tautulli/wiki/Tautulli-API-Reference
