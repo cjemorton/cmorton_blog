@@ -59,7 +59,7 @@ categories: jekyll update
   - Another bit of information needed is the version prefix and suffix, this can be generated from the version string by splitting it in half using the '-' as a delimitator and storing each in its own variables for ease of use later.
     - `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)`
     - `version_suffix=$(echo $version | cut -f 2 -d '-' | xargs)`
-  - Thats all the information needed collected into variable and ready to be used in the rest of the script.
+  - That's all the information needed collected into variable and ready to be used in the rest of the script.
 ---
 - A quick and dirty copy of the remainder of the script can be found in this gist: [plex-ports-patch-dirty-logic].
 ---
