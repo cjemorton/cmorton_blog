@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Another year has come to pass"
+date:   2000-01-01 00:00:01 -0700
+categories: jekyll update
+---
+
+Wow! Another year has come to pass.
+
+Got some interesting projects planned for 2024, hopefully I can get them written up and posted.
