@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Another year has come to pass"
-date:   2000-01-01 00:00:01 -0700
+date:   2023-12-26 00:00:01 -0700
 categories: jekyll update
 ---
 
