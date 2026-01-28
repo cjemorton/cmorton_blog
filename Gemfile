@@ -20,18 +20,30 @@ source "https://rubygems.org"
 # automatically through the github-pages gem (see below). Do NOT uncomment 
 # this line as it will cause dependency conflicts with GitHub Pages.
 # gem "jekyll", "~> 4.3.0"
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.5"
+
+# ==============================================================================
+# CRITICAL: Do NOT specify explicit versions for any gems managed by github-pages
+# ==============================================================================
+# The github-pages gem (below) pins specific versions of Jekyll, themes, and 
+# plugins to match GitHub Pages' environment. Specifying explicit versions for 
+# gems like minima, jekyll-feed, jekyll-seo-tag, or any other plugins will cause
+# Bundler conflicts and build failures on Cloudflare Pages and other CI systems.
+#
+# The github-pages gem automatically includes and manages:
+# - Jekyll (and all its dependencies)
+# - minima theme
+# - jekyll-feed
+# - jekyll-seo-tag
+# - And many other plugins
+#
+# To see what versions are included, visit:
+# https://pages.github.com/versions/
+# ==============================================================================
 
 # GitHub Pages compatibility: This gem manages all Jekyll dependencies including
-# Jekyll itself, ensuring compatibility with GitHub Pages. This approach prevents
-# version conflicts and ensures the site builds correctly on GitHub Pages.
+# Jekyll itself, themes, and plugins. This ensures compatibility with GitHub Pages
+# and prevents version conflicts on Cloudflare Pages and other build systems.
 gem "github-pages", group: :jekyll_plugins
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.17"
-  gem "jekyll-seo-tag", "~> 2.8"
-end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
