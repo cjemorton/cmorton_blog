@@ -1,3 +1,5 @@
+# Ruby version
+This project is intended to be compatible with GitHub Pages, which currently uses Ruby 2.7.1. If you encounter build errors related to `nokogiri` or other dependencies, ensure your local and CI environments use Ruby 2.7.1. You can use the included `.ruby-version` file for version managers like rbenv or rvm.
 # CMORTON Blog
 
 Personal blog for Clem Morton covering technical topics, programming, and system administration.
