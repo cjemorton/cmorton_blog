@@ -4,35 +4,16 @@ title: Offline
 permalink: /offline/
 ---
 
-<div style="text-align: center; padding: 40px 20px;">
+<div class="offline-page">
   <h1>📡 You're Offline</h1>
   <p>It looks like you're not connected to the internet right now.</p>
   <p>Don't worry! Some cached content may still be available.</p>
   
-  <div style="margin-top: 30px;">
+  <div class="offline-actions">
     <a href="/" class="button">Go to Home Page</a>
   </div>
   
-  <div style="margin-top: 20px;">
+  <div class="offline-actions">
     <button onclick="window.location.reload()" class="button">Try Again</button>
   </div>
 </div>
-
-<style>
-  .button {
-    display: inline-block;
-    padding: 12px 24px;
-    background: var(--accent-color, #2a7ae2);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: opacity 0.3s;
-  }
-  
-  .button:hover {
-    opacity: 0.9;
-  }
-</style>

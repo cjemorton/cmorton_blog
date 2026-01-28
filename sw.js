@@ -34,10 +34,11 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      // Claim clients immediately after cleanup
+      return self.clients.claim();
     })
   );
-  // Claim clients immediately
-  return self.clients.claim();
 });
 
 // Fetch event - serve from cache, fallback to network

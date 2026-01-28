@@ -243,10 +243,16 @@ class PWAManager {
   }
 
   showUpdateNotification() {
-    // Show a notification that an update is available
-    if (confirm('A new version is available. Reload to update?')) {
-      window.location.reload();
-    }
+    // Create a non-intrusive update banner
+    const banner = document.createElement('div');
+    banner.className = 'update-banner';
+    banner.innerHTML = `
+      <p>A new version is available!</p>
+      <button onclick="window.location.reload()">Update Now</button>
+      <button onclick="this.parentElement.remove()">Later</button>
+    `;
+    banner.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--accent-color);color:white;padding:16px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:9999;display:flex;gap:12px;align-items:center;';
+    document.body.appendChild(banner);
   }
 }
 
@@ -285,29 +291,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize PWA
   new PWAManager();
   
-  // Add skip-to-content link if it doesn't exist
-  if (!document.querySelector('.skip-to-content')) {
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-to-content';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-  }
-  
   // Mark main content area
   const mainContent = document.querySelector('main, .page-content');
   if (mainContent && !mainContent.id) {
     mainContent.id = 'main-content';
   }
 });
-
-// Export for module usage if needed
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    ThemeSwitcher,
-    MobileNav,
-    LazyLoader,
-    PWAManager,
-    SkeletonLoader
-  };
-}

@@ -317,6 +317,64 @@ html {
   }
 }
 
+/* Offline page styles */
+.offline-page {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.offline-actions {
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: opacity 0.3s;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+/* Update banner */
+.update-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color);
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.update-banner button {
+  background: white;
+  color: var(--accent-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.update-banner button:hover {
+  opacity: 0.9;
+}
+
 /* Responsive breakpoints */
 @media (max-width: 600px) {
   :root {
