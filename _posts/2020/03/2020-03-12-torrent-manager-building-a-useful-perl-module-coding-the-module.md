@@ -6,47 +6,47 @@ categories: technical programming
 tags: [perl, xml-rpc, rtorrent, development]
 excerpt: "Building a Perl module to manage and query rtorrent installation using XML-RPC communication."
 ---
-Recently I've been throwing together some Perl code to help manage and run queries on my [rtorrent][rakshasa-rtorrent] installation.
+Recently I've been putting together some Perl code to help manage and run queries on my [rtorrent][rakshasa-rtorrent] installation.
 
-I'll try to document the steps here in a series of blog posts. This post is for my own use, and may be lacking in clarity in some places.
+I'll try to document the steps here in a series of blog posts. This post is for my own use and may be lacking in clarity in some places.
 
-NOTE: These scripts and code snippets are not a "complete project". They are probably not what you're looking for.
-If you do happen to find pieces here and there useful. That's awesome! Have fun!
+NOTE: These scripts and code snippets are not a "complete project." They are probably not what you're looking for.
+If you do happen to find pieces here and there useful, that's awesome! Have fun!
 
-- [rtorrent][rakshasa-rtorrent] is the BitTorrent Client.
+- [rtorrent][rakshasa-rtorrent] is the BitTorrent client.
 - [ruTorrent][novik-rutorrent] is the web frontend for rtorrent.
 
 
-To get my Perl scripts talking to rTorrent/ruTorrent XML-RPC communication is needed.
-To accomplished this the Perl module [XML::RPC][xml-rpc] is used. It provides simple "Pure Perl" methods for XML::RPC communication.
+To get my Perl scripts talking to rTorrent/ruTorrent, XML-RPC communication is needed.
+To accomplish this, the Perl module [XML::RPC][xml-rpc] is used. It provides simple "Pure Perl" methods for XML-RPC communication.
 
-Assuming Perl and cpan are setup.
+Assuming Perl and cpan are set up:
 {% highlight bash %}
 sudo cpan install XML::RPC Data::Dumper
 {% endhighlight %}
 
-This will install the `XML::RPC` and `Data::Dumper` perl modules into your environment. The `Data::Dumper` module is used for testing.
+This will install the `XML::RPC` and `Data::Dumper` Perl modules into your environment. The `Data::Dumper` module is used for testing.
 
 ---
-A bit of information is needed to connect to your rtorrent installation.
-- The User you login to ruTorrent with. : `user`
-- The Password you login to ruTorrent with: `password`
-- The Host url your installation is running on: `rtorrent.example.com`
-- The Port, if your site is running `https` and it probably is. This port will be `443` as https communicates over that port.
-- The Endpoint: `RPC2` in my case. This may change depending on how rtorrent and ruTorrent are setup.
--- To setup your endpoint you can look at [RPC-Setup-XMLRPC][rpc-setup-xmlrpc] from the makers of rtorrent.
+A bit of information is needed to connect to your rtorrent installation:
+- The user you log in to ruTorrent with: `user`
+- The password you log in to ruTorrent with: `password`
+- The host URL your installation is running on: `rtorrent.example.com`
+- The port—if your site is running `https`, and it probably is, this port will be `443` as HTTPS communicates over that port.
+- The endpoint: `RPC2` in my case. This may change depending on how rtorrent and ruTorrent are set up.
+  - To set up your endpoint, you can look at [RPC-Setup-XMLRPC][rpc-setup-xmlrpc] from the makers of rtorrent.
 
 ---
-The script is provided with these bits of information at runtime, to avoid storing anything hardcoded into the scripts.
-The command to run the script looks like this.
+The script is provided with these bits of information at runtime to avoid storing anything hardcoded into the scripts.
+The command to run the script looks like this:
 {% highlight bash %}
 perl rtgen-db.pl user password rtorrent.example.com 443 RPC2
 {% endhighlight %}
-Assuming the script is called `rtgen-db.pl`
+Assuming the script is called `rtgen-db.pl`.
 
-Inside the script these command line switches are "caught" with the variable `$ARGV[]`. Keep in mind it's zero indexed. ex. `$ARGV[0]` will be `user`.
+Inside the script, these command line switches are "caught" with the variable `$ARGV[]`. Keep in mind it's zero-indexed; for example, `$ARGV[0]` will be `user`.
 
-The script will look like this.
+The script will look like this:
 
 {% highlight bash %}
 my $user = $ARGV[0]; # User.
@@ -56,22 +56,22 @@ my $port = $ARGV[3]; # Port
 my $endp = $ARGV[4]; # Endpoint.
 {% endhighlight %}
 
-From here each variable can be used in a script.
-(Technically each $ARGV[] variable can be used as well. I've written it out here for clarity.)
+From here, each variable can be used in a script.
+(Technically, each $ARGV[] variable can be used as well. I've written it out here for clarity.)
 I have included an alternative to clean up and minimize code clutter.
 
-The string that is used to generate a useable "URL" is:
+The string that is used to generate a usable "URL" is:
 
 {% highlight bash %}
 "https://$user\:$pass\@$host\:$port\/$endp"
 {% endhighlight %}
-- Alternative url, after tweaking and calling `$ARGV[]` directly is:.
+- Alternative URL, after tweaking and calling `$ARGV[]` directly is:
 {% highlight bash %}
 "https://$ARGV[0]\:$ARGV[1]\@$ARGV[2]\:$ARGV[3]\/$ARGV[4]"
 {% endhighlight %}
 
 ---
-To call the `XML::RPC` library make sure it's listed at the top of the script. `use XML::RPC;` and call it with.
+To call the `XML::RPC` library, make sure it's listed at the top of the script. `use XML::RPC;` and call it with:
 {% highlight bash %}
 my $xmlrpc = XML::RPC->new("https://$user\:$pass\@$host\:$port\/$endp");
 {% endhighlight %}
@@ -80,8 +80,8 @@ my $xmlrpc = XML::RPC->new("https://$user\:$pass\@$host\:$port\/$endp");
 my $xmlrpc = XML::RPC->new("https://$ARGV[0]\:$ARGV[1]\@$ARGV[2]\:$ARGV[3]\/$ARGV[4]");
 {% endhighlight %}
 ---
-Now that we can communicate with rtorrent. We need to know what say, and what to ask it.
-Here we build on the wonderful work done by the github user `mdevaev` on the project `emonoda`. - Which they picked up from [gi-torrent]
+Now that we can communicate with rtorrent, we need to know what to say and what to ask it.
+Here we build on the wonderful work done by the GitHub user `mdevaev` on the project `emonoda`, which they picked up from [gi-torrent].
 
 They have done a wonderful job documenting and compiling it into a nice format for me to easily read.
 
@@ -91,18 +91,18 @@ I find it here: [rtorrent-xmlrpc-reference]
 
 ---
 
-The call that I am interested in at the moment is. `download_list`
+The call that I am interested in at the moment is `download_list`.
 
-Passed to the `XML::RPC` library the call looks like this.
+Passed to the `XML::RPC` library, the call looks like this:
 
 {% highlight perl %}
 my $dl_list = $xmlrpc->call( 'download_list' );
 {% endhighlight %}
 
 ---
-From here the script will connect to the server and get the hashes of all the torrents.
+From here, the script will connect to the server and get the hashes of all the torrents.
 
-Now I have chosen to setup a for each loop to loop over all the results returned from the call and get the name of the torrent associated with it.
+Now I have chosen to set up a for-each loop to loop over all the results returned from the call and get the name of the torrent associated with it.
 {% highlight perl %}
 foreach my $i () {
 //get the name of the torrent from the server.//

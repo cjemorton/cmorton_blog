@@ -5,14 +5,14 @@ permalink: /about/
 show_in_nav: false
 ---
 
-My name is Clem Morton and this is my Blog.
+My name is Clem Morton, and this is my blog.
 
 Here are some links to my other places:
 
 [GitHub]
 
 ---
-If you need a VPS checkout these providers:
+If you need a VPS, check out these providers:
 
 [VPS-ENGLISH]
 
