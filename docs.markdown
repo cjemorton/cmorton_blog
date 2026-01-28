@@ -2,6 +2,7 @@
 layout: page
 title: Documentation
 permalink: /docs/
+show_in_nav: false
 ---
 
 # Documentation
