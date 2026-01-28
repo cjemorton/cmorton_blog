@@ -8,9 +8,8 @@ source "https://rubygems.org"
 # times.
 # ==============================================================================
 
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
+# For GitHub Pages compatibility, the Jekyll version is managed automatically
+# by the github-pages gem (see below). To run Jekyll locally, use:
 #
 #     bundle exec jekyll serve
 #
