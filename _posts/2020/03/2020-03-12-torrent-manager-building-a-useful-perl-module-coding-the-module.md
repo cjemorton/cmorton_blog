@@ -2,7 +2,9 @@
 layout: post
 title:  "Torrent Manager :: Building a useful Perl module :: Coding the Module!"
 date:   2020-03-12 10:52:59 -0700
-categories: jekyll update
+categories: technical programming
+tags: [perl, xml-rpc, rtorrent, development]
+excerpt: "Building a Perl module to manage and query rtorrent installation using XML-RPC communication."
 ---
 Recently I've been throwing together some Perl code to help manage and run queries on my [rtorrent][rakshasa-rtorrent] installation.
 

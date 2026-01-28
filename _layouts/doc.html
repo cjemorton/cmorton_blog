@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<article class="doc h-entry" itemscope itemtype="http://schema.org/TechArticle">
+
+  <header class="doc-header">
+    <h1 class="doc-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="doc-meta">
+      {%- if page.date -%}
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        Last updated: {{ page.date | date: "%b %-d, %Y" }}
+      </time>
+      {%- endif -%}
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}
+    </p>
+    {%- if page.excerpt -%}
+    <p class="doc-excerpt" itemprop="abstract">{{ page.excerpt }}</p>
+    {%- endif -%}
+  </header>
+
+  {%- if page.toc != false -%}
+  <nav class="doc-toc" aria-label="Table of Contents">
+    <h2>Table of Contents</h2>
+    {{ content | toc_only }}
+  </nav>
+  {%- endif -%}
+
+  <div class="doc-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
