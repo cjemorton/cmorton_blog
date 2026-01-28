@@ -23,14 +23,32 @@ email: cmorton@cmorton.info
 description: >- # this means to ignore newlines until "baseurl:"
   This is the personal blog for Clem Morton
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://cmorton.info" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://cmorton.info" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: clemmorton
 github_username:  cjemorton
+
+# Author information for SEO
+author:
+  name: Clem Morton
+  email: cmorton@cmorton.info
+  twitter: clemmorton
+
+# Social media links for SEO
+social:
+  name: Clem Morton
+  links:
+    - https://twitter.com/clemmorton
+    - https://github.com/cjemorton
+
+# SEO settings
+lang: en_US
+timezone: America/Denver
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
 # Exclude from processing.
 # The following items will not be processed, by default.

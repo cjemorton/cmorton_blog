@@ -46,7 +46,7 @@ We use the Device Information that we collect to help us screen for potential ri
 
 SHARING YOUR PERSONAL INFORMATION
 
-We may your Personal Information with third parties to help us use your Personal Information, as described above.
+We may share your Personal Information with third parties to help us use your Personal Information, as described above.
 
 We may also use Google Analytics or other Analytics platforms to help us understand usage and better adapt and optimize them.
 
@@ -58,7 +58,7 @@ We may use your Personal Information to provide you with targeted advertisements
 
 Mention opt-out links from external services such as:
 
-If targeted advertising is ever utilized by any of these domains, rest asured there will always be a way to opt out of any targeted advertising.
+If targeted advertising is ever utilized by any of these domains, rest assured there will always be a way to opt out of any targeted advertising.
 
 YOUR RIGHTS
 

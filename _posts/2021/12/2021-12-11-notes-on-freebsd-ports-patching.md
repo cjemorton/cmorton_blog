@@ -74,7 +74,7 @@ The pieces of information I need to get and set as variables in my script are as
 >
 > > `timestamp=$(echo $json | jq '.response.data | {release_date}' | jq '.release_date' | xargs)`
 
-> Another bit of information needed is the version prefix and suffix, this can be generated from the version string by splitting it in half using the '-' as a delimitator and storing each in its own variables for ease of use later.
+> Another bit of information needed is the version prefix and suffix, this can be generated from the version string by splitting it in half using the '-' as a delimiter and storing each in its own variables for ease of use later.
 >
 > > `version_prefix=$(echo $version | cut -f 1 -d '-' | xargs)`
 >
