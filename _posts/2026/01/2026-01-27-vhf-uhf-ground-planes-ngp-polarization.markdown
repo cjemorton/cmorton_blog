@@ -2,7 +2,7 @@
 layout: post
 title:  "Understanding Ground Planes, No-Ground-Plane Antennas, and Polarization in VHF and UHF Radio Systems"
 date:   2026-01-27 18:13:00 -0700
-categories: amateur-radio antennas vhf uhf technical
+categories: amateur-radio antennas vhf uhf technical docs
 author: Clem Morton
 permalink: /2026/01/27/vhf-uhf-ground-planes-ngp-polarization
 ---
