@@ -19,6 +19,7 @@
         <div class="trigger">
           <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
           <a class="page-link" href="{{ '/generated-docs/' | relative_url }}">Docs</a>
+          <a class="page-link" href="{{ '/projects/' | relative_url }}">Projects</a>
           {%- for path in page_paths -%}
             {%- assign my_page = site.pages | where: "path", path | first -%}
             {%- if my_page.title and my_page.show_in_nav != false and my_page.title != "About" -%}
