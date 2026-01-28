@@ -305,6 +305,13 @@ html {
   background: var(--code-bg);
 }
 
+.cache-clear-button:focus-visible {
+  opacity: 1;
+  outline: 3px solid var(--accent-color);
+  outline-offset: 2px;
+  background: var(--code-bg);
+}
+
 /* Print styles */
 @media print {
   /* Hide navigation and UI elements */

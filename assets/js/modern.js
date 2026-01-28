@@ -196,6 +196,11 @@ class CacheClearHandler {
   }
 
   async clearCache() {
+    // Ask for confirmation before clearing cache
+    if (!confirm('Clear all site cache and storage? This will reload the page.')) {
+      return;
+    }
+
     try {
       // Unregister service workers
       if ('serviceWorker' in navigator) {
@@ -218,16 +223,18 @@ class CacheClearHandler {
       sessionStorage.clear();
 
       // Reload the page
-      window.location.reload(true);
+      window.location.reload();
     } catch (error) {
       console.error('Error clearing cache:', error);
       // Still reload even if there's an error
-      window.location.reload(true);
+      window.location.reload();
     }
   }
 }
 
 // Function to update current datetime display
+let datetimeIntervalId = null;
+
 function updateCurrentDateTime() {
   const datetimeElement = document.getElementById('current-datetime');
   if (datetimeElement) {
@@ -242,6 +249,10 @@ function updateCurrentDateTime() {
       second: '2-digit'
     };
     datetimeElement.textContent = now.toLocaleDateString('en-US', options);
+  } else if (datetimeIntervalId) {
+    // Element no longer exists, clear the interval
+    clearInterval(datetimeIntervalId);
+    datetimeIntervalId = null;
   }
 }
 
@@ -261,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Update current datetime display
   updateCurrentDateTime();
-  setInterval(updateCurrentDateTime, 1000); // Update every second
+  datetimeIntervalId = setInterval(updateCurrentDateTime, 1000); // Update every second
   
   // Mark main content area
   const mainContent = document.querySelector('main, .page-content');
