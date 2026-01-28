@@ -22,6 +22,37 @@ class ThemeSwitcher {
   }
 
   createThemeSwitcher() {
+    // Check if footer theme switcher container exists
+    const footerContainer = document.getElementById('footer-theme-switcher');
+    if (footerContainer) {
+      this.createFooterThemeSwitcher(footerContainer);
+    } else {
+      // Fallback: create floating theme switcher if footer container not found
+      this.createFloatingThemeSwitcher();
+    }
+  }
+
+  createFooterThemeSwitcher(container) {
+    const themes = [
+      { name: 'light', icon: '☀️', label: 'Light theme' },
+      { name: 'dark', icon: '🌙', label: 'Dark theme' },
+      { name: 'blue', icon: '🌊', label: 'Blue theme' },
+      { name: 'compact', icon: '📐', label: 'Compact theme' },
+      { name: 'readability', icon: '📖', label: 'Readability theme' }
+    ];
+    
+    themes.forEach(theme => {
+      const button = document.createElement('button');
+      button.className = 'theme-btn ' + (theme.name === this.currentTheme ? 'active' : '');
+      button.setAttribute('data-theme', theme.name);
+      button.setAttribute('aria-label', theme.label);
+      button.setAttribute('title', theme.label);
+      button.innerHTML = `<span class="theme-icon" aria-hidden="true">${theme.icon}</span><span class="theme-name">${theme.label}</span>`;
+      container.appendChild(button);
+    });
+  }
+
+  createFloatingThemeSwitcher() {
     const switcher = document.createElement('div');
     switcher.className = 'theme-switcher';
     switcher.setAttribute('role', 'group');
@@ -30,7 +61,9 @@ class ThemeSwitcher {
     const themes = [
       { name: 'light', icon: '☀️', label: 'Light theme' },
       { name: 'dark', icon: '🌙', label: 'Dark theme' },
-      { name: 'blue', icon: '🌊', label: 'Blue theme' }
+      { name: 'blue', icon: '🌊', label: 'Blue theme' },
+      { name: 'compact', icon: '📐', label: 'Compact theme' },
+      { name: 'readability', icon: '📖', label: 'Readability theme' }
     ];
     
     themes.forEach(theme => {
@@ -39,7 +72,10 @@ class ThemeSwitcher {
       button.setAttribute('data-theme', theme.name);
       button.setAttribute('aria-label', theme.label);
       button.setAttribute('title', theme.label);
-      button.textContent = theme.icon;
+      const icon = document.createElement('span');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = theme.icon;
+      button.appendChild(icon);
       switcher.appendChild(button);
     });
     
@@ -48,8 +84,14 @@ class ThemeSwitcher {
 
   setupEventListeners() {
     document.addEventListener('click', (e) => {
-      if (e.target.matches('.theme-switcher button')) {
-        this.switchTheme(e.target.dataset.theme);
+      if (e.target.matches('.theme-switcher button') || 
+          e.target.matches('.theme-btn') ||
+          e.target.closest('.theme-btn')) {
+        const button = e.target.closest('.theme-btn') || e.target;
+        const theme = button.dataset.theme || button.getAttribute('data-theme');
+        if (theme) {
+          this.switchTheme(theme);
+        }
       }
     });
   }
@@ -59,8 +101,8 @@ class ThemeSwitcher {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     
-    // Update active button
-    document.querySelectorAll('.theme-switcher button').forEach(btn => {
+    // Update active button (both footer and floating switchers)
+    document.querySelectorAll('.theme-switcher button, .theme-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.theme === theme);
     });
   }
@@ -256,6 +298,60 @@ class PWAManager {
   }
 }
 
+// Print Handler
+class PrintHandler {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    // Add print buttons to posts and pages
+    this.addPrintButtons();
+    this.setupEventListeners();
+  }
+
+  addPrintButtons() {
+    // Find article content areas (posts, pages, docs, projects)
+    const contentAreas = document.querySelectorAll('.post-content, .page-content article, .doc-content, .project-content');
+    
+    contentAreas.forEach(content => {
+      // Check if print button already exists
+      if (!content.querySelector('.print-button')) {
+        const printBtn = this.createPrintButton();
+        // Insert at the beginning of the content
+        if (content.parentElement) {
+          content.parentElement.insertBefore(printBtn, content);
+        }
+      }
+    });
+  }
+
+  createPrintButton() {
+    const button = document.createElement('button');
+    button.className = 'print-button';
+    button.setAttribute('aria-label', 'Print this article');
+    const icon = document.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = '🖨️ ';
+    button.appendChild(icon);
+    button.appendChild(document.createTextNode('Print Article'));
+    return button;
+  }
+
+  setupEventListeners() {
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('.print-button') || e.target.closest('.print-button')) {
+        e.preventDefault();
+        this.print();
+      }
+    });
+  }
+
+  print() {
+    window.print();
+  }
+}
+
 // Skeleton Loader
 class SkeletonLoader {
   static show(container) {
@@ -290,6 +386,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize PWA
   new PWAManager();
+  
+  // Initialize print handler
+  new PrintHandler();
   
   // Mark main content area
   const mainContent = document.querySelector('main, .page-content');

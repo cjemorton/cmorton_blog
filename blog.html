@@ -1,0 +1,38 @@
+---
+layout: default
+title: Personal Blog
+permalink: /blog/
+---
+
+<div class="blog-page">
+  <h1>Personal Blog</h1>
+  <p class="page-description">Technical articles, tutorials, and personal thoughts on programming and system administration.</p>
+
+  {%- if site.posts.size > 0 -%}
+    <ul class="post-list">
+      {%- for post in site.posts -%}
+      <li class="post-list-item">
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <h2>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h2>
+        {%- if post.categories.size > 0 -%}
+          <div class="post-categories">
+            {%- for category in post.categories -%}
+              <span class="category-tag">{{ category }}</span>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {%- if post.excerpt -%}
+          <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+  {%- else -%}
+    <p>No blog posts yet. Check back soon!</p>
+  {%- endif -%}
+
+</div>
