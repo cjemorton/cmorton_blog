@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  <div class="content-sections">
+    
+    <section class="blog-section">
+      <h2>Personal Blog</h2>
+      <p>Technical articles, tutorials, and personal thoughts on programming and system administration.</p>
+      {%- if site.posts.size > 0 -%}
+        <ul class="post-list">
+          {%- for post in site.posts limit:5 -%}
+          <li class="post-list-item">
+            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+            <h3>
+              <a class="post-link" href="{{ post.url | relative_url }}">
+                {{ post.title | escape }}
+              </a>
+            </h3>
+            {%- if post.excerpt -%}
+              <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+            {%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ul>
+        <p class="view-all"><a href="{{ '/blog/' | relative_url }}">View all blog posts →</a></p>
+      {%- endif -%}
+    </section>
+
+    <section class="docs-section">
+      <h2>Generated Documentation</h2>
+      <p>AI-assisted technical documentation and guides.</p>
+      {%- if site.docs.size > 0 -%}
+        <ul class="doc-list">
+          {%- for doc in site.docs limit:5 -%}
+          <li class="doc-list-item">
+            {%- if doc.date -%}
+            <span class="doc-meta">{{ doc.date | date: "%b %-d, %Y" }}</span>
+            {%- endif -%}
+            <h3>
+              <a class="doc-link" href="{{ doc.url | relative_url }}">
+                {{ doc.title | escape }}
+              </a>
+            </h3>
+            {%- if doc.excerpt -%}
+              <p>{{ doc.excerpt | strip_html | truncatewords: 30 }}</p>
+            {%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ul>
+        <p class="view-all"><a href="{{ '/generated-docs/' | relative_url }}">View all documentation →</a></p>
+      {%- else -%}
+        <p>No documentation yet. Check back soon!</p>
+      {%- endif -%}
+    </section>
+
+  </div>
+
+  {%- if site.paginate -%}
+    <div class="pager">
+      <ul class="pagination">
+      {%- if paginator.previous_page %}
+        <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
+      {%- else %}
+        <li><div class="pager-edge">•</div></li>
+      {%- endif %}
+        <li><div class="current-page">{{ paginator.page }}</div></li>
+      {%- if paginator.next_page %}
+        <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>
+      {%- else %}
+        <li><div class="pager-edge">•</div></li>
+      {%- endif %}
+      </ul>
+    </div>
+  {%- endif -%}
+
+</div>

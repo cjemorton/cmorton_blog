@@ -1,0 +1,31 @@
+---
+layout: default
+title: Generated Documentation
+permalink: /generated-docs/
+---
+
+<div class="docs-page">
+  <h1>Generated Documentation</h1>
+  <p class="page-description">AI-assisted technical documentation, guides, and how-tos.</p>
+
+  {%- if site.docs.size > 0 -%}
+    <div class="content-grid">
+      {%- for doc in site.docs -%}
+        <div class="card">
+          <h2>
+            <a href="{{ doc.url | relative_url }}">{{ doc.title }}</a>
+          </h2>
+          {%- if doc.excerpt -%}
+            <p>{{ doc.excerpt | strip_html | truncatewords: 30 }}</p>
+          {%- endif -%}
+          {%- if doc.date -%}
+            <p class="doc-date">Last updated: {{ doc.date | date: "%B %d, %Y" }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p>No documentation yet. Check back soon!</p>
+  {%- endif -%}
+
+</div>
