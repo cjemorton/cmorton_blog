@@ -9,7 +9,12 @@ show_in_nav: false
   <h1>Generated Documentation</h1>
   <p class="page-description">AI-assisted technical documentation, guides, and how-tos.</p>
 
-  {%- if site.docs.size > 0 -%}
+  {%- assign has_content = false -%}
+  {%- if site.docs.size > 0 or site.posts.size > 0 -%}
+    {%- assign has_content = true -%}
+  {%- endif -%}
+
+  {%- if has_content -%}
     <div class="content-grid">
       {%- for doc in site.docs -%}
         <div class="card">
@@ -23,6 +28,22 @@ show_in_nav: false
             <p class="doc-date">Last updated: {{ doc.date | date: "%B %d, %Y" }}</p>
           {%- endif -%}
         </div>
+      {%- endfor -%}
+      
+      {%- for post in site.posts -%}
+        {%- if post.categories contains 'docs' -%}
+          <div class="card">
+            <h2>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            {%- if post.excerpt -%}
+              <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+            {%- endif -%}
+            {%- if post.date -%}
+              <p class="doc-date">{{ post.date | date: "%B %d, %Y" }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   {%- else -%}
