@@ -2,7 +2,9 @@
 layout: post
 title:  "FreeBSD Ports :: Patching Privately :: Notes on privately patching ports"
 date:   2021-12-11 17:00:03 -0700
-categories: jekyll update
+categories: technical sysadmin
+tags: [freebsd, ports, patching, shell-scripting, plex]
+excerpt: "Building a shell script to automatically patch and update FreeBSD ports when upstream changes aren't yet available."
 ---
 ### Intro to the problem.
 Plex reports a new versions of the server. The FreeBSD port maintainer has not updated the port yet.

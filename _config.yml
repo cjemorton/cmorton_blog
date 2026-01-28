@@ -50,6 +50,36 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+  docs:
+    output: true
+    permalink: /docs/:name/
+
+# Collection defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Clem Morton"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+      author: "Clem Morton"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "doc"
+      author: "Clem Morton"
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

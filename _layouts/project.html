@@ -1,0 +1,42 @@
+---
+layout: default
+---
+<article class="project h-entry" itemscope itemtype="http://schema.org/CreativeWork">
+
+  <header class="project-header">
+    <h1 class="project-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="project-meta">
+      {%- if page.date -%}
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {{ page.date | date: date_format }}
+      </time>
+      {%- endif -%}
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}
+      {%- if page.github_url -%}
+        • <a href="{{ page.github_url }}" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      {%- endif -%}
+      {%- if page.demo_url -%}
+        • <a href="{{ page.demo_url }}" class="project-link" target="_blank" rel="noopener noreferrer">Live Demo</a>
+      {%- endif -%}
+    </p>
+    {%- if page.excerpt -%}
+    <p class="project-excerpt" itemprop="abstract">{{ page.excerpt }}</p>
+    {%- endif -%}
+    {%- if page.tags -%}
+    <div class="project-tags">
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {%- endif -%}
+  </header>
+
+  <div class="project-content e-content" itemprop="text">
+    {{ content }}
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
