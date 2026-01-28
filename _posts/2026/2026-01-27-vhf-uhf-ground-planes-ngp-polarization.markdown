@@ -9,8 +9,7 @@ permalink: /2026/01/27/vhf-uhf-ground-planes-ngp-polarization
 
 **Understanding Ground Planes, No-Ground-Plane Antennas, and Polarization in VHF and UHF Radio Systems**
 
-**Clem Morton**  
-* Grok Assisted AI Research *    
+**Clem Morton**     
 January 27, 2026
 
 
@@ -121,3 +120,4 @@ Future improvements may include adaptive polarization systems and metamaterial g
 (Word count: ≈ 920)
 
 *This article is released under a Creative Commons Attribution 4.0 International License.*
+*Grok Assisted - AI Research*
