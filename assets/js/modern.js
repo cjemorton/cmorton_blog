@@ -47,7 +47,7 @@ class ThemeSwitcher {
       button.setAttribute('data-theme', theme.name);
       button.setAttribute('aria-label', theme.label);
       button.setAttribute('title', theme.label);
-      button.innerHTML = `<span class="theme-icon">${theme.icon}</span><span class="theme-name">${theme.label}</span>`;
+      button.innerHTML = `<span class="theme-icon" aria-hidden="true">${theme.icon}</span><span class="theme-name">${theme.label}</span>`;
       container.appendChild(button);
     });
   }
@@ -72,7 +72,10 @@ class ThemeSwitcher {
       button.setAttribute('data-theme', theme.name);
       button.setAttribute('aria-label', theme.label);
       button.setAttribute('title', theme.label);
-      button.textContent = theme.icon;
+      const icon = document.createElement('span');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = theme.icon;
+      button.appendChild(icon);
       switcher.appendChild(button);
     });
     
@@ -327,7 +330,11 @@ class PrintHandler {
     const button = document.createElement('button');
     button.className = 'print-button';
     button.setAttribute('aria-label', 'Print this article');
-    button.innerHTML = '🖨️ Print Article';
+    const icon = document.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = '🖨️ ';
+    button.appendChild(icon);
+    button.appendChild(document.createTextNode('Print Article'));
     return button;
   }
 

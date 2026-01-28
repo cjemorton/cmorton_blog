@@ -90,17 +90,17 @@ cmorton_blog/
 │   │   └── modern.css  # Custom theme styles (5 themes + print CSS)
 │   └── js/
 │       └── modern.js   # Theme switcher, PWA, navigation, print handler
-├── copilot-generated/  # AI-generated docs (excluded from build)
+├── copilot-generated/  # AI-generated developer docs (excluded from build)
 │   ├── IMPLEMENTATION_SUMMARY.md
 │   ├── PWA_ICONS_README.md
 │   ├── SECURITY.md
-│   ├── SITE_ANALYSIS_REPORT.md
-│   ├── accessibility.markdown
-│   ├── docs.markdown
-│   ├── offline.html
-│   └── projects.markdown
+│   └── SITE_ANALYSIS_REPORT.md
+├── accessibility.markdown # Accessibility statement (user-facing)
+├── offline.html          # Offline page for PWA
 ├── blog.html           # Personal Blog index page
 ├── generated-docs.html # Generated Documentation index page
+├── docs.markdown       # Documentation collection index
+├── projects.markdown   # Projects collection index
 ├── manifest.json       # PWA manifest
 └── sw.js              # Service worker
 ```
@@ -173,14 +173,16 @@ toc: true  # Enable table of contents
 
 ### AI-Generated Content Organization
 
-**Important Rule:** All AI-generated documentation, implementation summaries, and similar auto-generated files should be placed in the `/copilot-generated/` folder. This folder is excluded from the Jekyll build process and will not appear in the published site or navigation menus.
+**Important Rule:** All AI-generated **development documentation** (implementation summaries, site analysis reports, security documentation for developers, PWA documentation, etc.) should be placed in the `/copilot-generated/` folder. This folder is excluded from the Jekyll build process and will not appear in the published site or navigation menus.
 
-Files in `/copilot-generated/` include:
-- Implementation summaries
-- Site analysis reports
-- Security documentation
-- PWA documentation
-- And any other Copilot/AI-generated reference documents
+**Files in `/copilot-generated/`** are for **developer reference only** and include:
+- `IMPLEMENTATION_SUMMARY.md` - Implementation notes and summaries
+- `SITE_ANALYSIS_REPORT.md` - Site analysis and recommendations
+- `SECURITY.md` - Security policy for developers
+- `PWA_ICONS_README.md` - PWA icon documentation
+- And any other Copilot/AI-generated reference documents **not** intended for end users
+
+**User-facing content** (even if AI-assisted) such as accessibility statements, documentation pages, blog posts, etc., should be placed in their appropriate folders (`_docs/`, `_posts/`, or root) and will be included in the site build.
 
 This organizational structure keeps the main site clean and focused on user-facing content while preserving AI-generated documentation for development reference.
 

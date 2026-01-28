@@ -150,7 +150,10 @@ body {
 [data-theme="readability"] p {
   margin-bottom: 1.5em;
   text-align: justify;
+  /* Note: hyphens require lang attribute on html element for proper browser support */
   hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 [data-theme="readability"] .post-content,
@@ -557,11 +560,18 @@ html {
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: #666;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   a[href^="#"]:after,
   a[href^="javascript:"]:after {
     content: "";
+  }
+  
+  /* Hide very long URLs in print */
+  a[href*="very-long-url-that"]:after {
+    content: " (URL omitted)";
   }
   
   /* Clean margins */
