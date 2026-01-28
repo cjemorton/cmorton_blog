@@ -1,5 +1,5 @@
 # Ruby version
-This project is intended to be compatible with GitHub Pages, which currently uses Ruby 2.7.1. If you encounter build errors related to `nokogiri` or other dependencies, ensure your local and CI environments use Ruby 2.7.1. You can use the included `.ruby-version` file for version managers like rbenv or rvm.
+This project now requires Ruby 3.1.0 or higher to resolve compatibility issues with recent versions of the nokogiri gem and other dependencies. The project is tested with Ruby 3.2.3. You can use the included `.ruby-version` file for version managers like rbenv or rvm.
 # CMORTON Blog
 
 Personal blog for Clem Morton covering technical topics, programming, and system administration.
@@ -30,7 +30,7 @@ Personal blog for Clem Morton covering technical topics, programming, and system
 
 ## 📋 Requirements
 
-- Ruby 2.7 or higher
+- Ruby 3.1.0 or higher (tested with Ruby 3.2.3)
 - Bundler
 - Jekyll 4.3+
 
