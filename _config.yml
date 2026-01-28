@@ -89,6 +89,7 @@ defaults:
 # their entries' file path in the `include:` list.
 #
 exclude:
+  - docs/
   - copilot-generated/
   - .sass-cache/
   - .jekyll-cache/
