@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /about/
+show_in_nav: false
 ---
 
 My name is Clem Morton and this is my Blog.

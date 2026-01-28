@@ -2,6 +2,7 @@
 layout: page
 title: Projects
 permalink: /projects/
+show_in_nav: false
 ---
 
 # Projects
