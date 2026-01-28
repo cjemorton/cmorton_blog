@@ -17,6 +17,8 @@ If you need a VPS checkout these providers:
 
 [VPS-GERMAN]
 
+**Disclosure:** The VPS links above contain affiliate referral codes. I may receive a small commission if you use these links to purchase services, at no additional cost to you.
+
 ---
 
 [GitHub]: https://github.com/cjemorton

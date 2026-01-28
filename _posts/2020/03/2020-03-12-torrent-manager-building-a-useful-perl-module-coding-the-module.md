@@ -4,11 +4,11 @@ title:  "Torrent Manager :: Building a useful Perl module :: Coding the Module!"
 date:   2020-03-12 10:52:59 -0700
 categories: jekyll update
 ---
-Recently I've been throwing together some Perl code to help manage and run query's on my [rtorrent][rakshasa-rtorrent] installation.
+Recently I've been throwing together some Perl code to help manage and run queries on my [rtorrent][rakshasa-rtorrent] installation.
 
 I'll try to document the steps here in a series of blog posts. This post is for my own use, and may be lacking in clarity in some places.
 
-NOTE: These scripts and code snippets are not a "complete project". They are probably not what your looking for.
+NOTE: These scripts and code snippets are not a "complete project". They are probably not what you're looking for.
 If you do happen to find pieces here and there useful. That's awesome! Have fun!
 
 - [rtorrent][rakshasa-rtorrent] is the BitTorrent Client.
