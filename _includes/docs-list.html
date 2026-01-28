@@ -1,0 +1,12 @@
+<!-- _includes/docs-list.html -->
+<ul class="docs-list">
+  {% assign docs_posts = site.posts | where_exp: "post", "post.categories contains 'docs'" %}
+  {% assign docs_collection = site.docs %}
+  {% assign all_docs = docs_posts | concat: docs_collection %}
+  {% for doc in all_docs %}
+    <li>
+      <a href="{{ doc.url | relative_url }}">{{ doc.title }}</a>
+      {% if doc.date %}<span class="doc-date">({{ doc.date | date: "%b %-d, %Y" }})</span>{% endif %}
+    </li>
+  {% endfor %}
+</ul>
