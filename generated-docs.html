@@ -9,12 +9,14 @@ show_in_nav: false
   <h1>Generated Documentation</h1>
   <p class="page-description">AI-assisted technical documentation, guides, and how-tos.</p>
 
-  {%- assign has_content = false -%}
-  {%- if site.docs.size > 0 or site.posts.size > 0 -%}
-    {%- assign has_content = true -%}
-  {%- endif -%}
+  {%- assign docs_posts_count = 0 -%}
+  {%- for post in site.posts -%}
+    {%- if post.categories contains 'docs' -%}
+      {%- assign docs_posts_count = docs_posts_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
 
-  {%- if has_content -%}
+  {%- if site.docs.size > 0 or docs_posts_count > 0 -%}
     <div class="content-grid">
       {%- for doc in site.docs -%}
         <div class="card">

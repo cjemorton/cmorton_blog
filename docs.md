@@ -9,6 +9,14 @@ show_in_nav: false
 
 Technical documentation, guides, and how-tos:
 
+{% assign docs_posts_count = 0 %}
+{% for post in site.posts %}
+  {% if post.categories contains 'docs' %}
+    {% assign docs_posts_count = docs_posts_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if site.docs.size > 0 or docs_posts_count > 0 %}
 <div class="content-grid">
   {% for doc in site.docs %}
     <div class="card">
@@ -40,15 +48,6 @@ Technical documentation, guides, and how-tos:
     {% endif %}
   {% endfor %}
 </div>
-
-{% assign total_docs = site.docs.size %}
-{% assign docs_posts = 0 %}
-{% for post in site.posts %}
-  {% if post.categories contains 'docs' %}
-    {% assign docs_posts = docs_posts | plus: 1 %}
-  {% endif %}
-{% endfor %}
-
-{% if total_docs == 0 and docs_posts == 0 %}
+{% else %}
 <p>No documentation yet. Check back soon!</p>
 {% endif %}
