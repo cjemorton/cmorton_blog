@@ -282,6 +282,29 @@ html {
   outline-offset: 2px;
 }
 
+/* Cache Clear Button - Small, unobtrusive, bottom-right */
+.cache-clear-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.15;
+  transition: opacity var(--transition-speed), transform 0.2s;
+  padding: 8px;
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.cache-clear-button:hover,
+.cache-clear-button:focus {
+  opacity: 1;
+  transform: scale(1.1);
+  background: var(--code-bg);
+}
+
 /* Print styles */
 @media print {
   /* Hide navigation and UI elements */
@@ -290,6 +313,7 @@ html {
   .site-header,
   .site-footer,
   .print-button,
+  .cache-clear-button,
   .skip-to-content {
     display: none !important;
   }
@@ -395,6 +419,15 @@ html {
   border-bottom: 2px solid var(--accent-color);
   padding-bottom: 12px;
   margin-bottom: 16px;
+}
+
+/* Current datetime display */
+.current-datetime {
+  font-size: 0.85em;
+  color: #999;
+  text-align: right;
+  margin: 0 0 16px 0;
+  font-style: italic;
 }
 
 /* Docs Link Section */

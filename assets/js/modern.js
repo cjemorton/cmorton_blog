@@ -176,6 +176,75 @@ class PrintHandler {
   }
 }
 
+// Cache Clear Handler - clears all site caches
+class CacheClearHandler {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('.cache-clear-button') || e.target.closest('.cache-clear-button')) {
+        e.preventDefault();
+        this.clearCache();
+      }
+    });
+  }
+
+  async clearCache() {
+    try {
+      // Unregister service workers
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (const registration of registrations) {
+          await registration.unregister();
+        }
+      }
+
+      // Clear all caches
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+      }
+
+      // Clear localStorage
+      localStorage.clear();
+
+      // Clear sessionStorage
+      sessionStorage.clear();
+
+      // Reload the page
+      window.location.reload(true);
+    } catch (error) {
+      console.error('Error clearing cache:', error);
+      // Still reload even if there's an error
+      window.location.reload(true);
+    }
+  }
+}
+
+// Function to update current datetime display
+function updateCurrentDateTime() {
+  const datetimeElement = document.getElementById('current-datetime');
+  if (datetimeElement) {
+    const now = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+    datetimeElement.textContent = now.toLocaleDateString('en-US', options);
+  }
+}
+
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize mobile navigation
@@ -186,6 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize print handler
   new PrintHandler();
+  
+  // Initialize cache clear handler
+  new CacheClearHandler();
+  
+  // Update current datetime display
+  updateCurrentDateTime();
+  setInterval(updateCurrentDateTime, 1000); // Update every second
   
   // Mark main content area
   const mainContent = document.querySelector('main, .page-content');

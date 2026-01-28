@@ -10,8 +10,8 @@ layout: default
   {{ content }}
 
   <section class="blog-section">
-    <h2>Personal Blog</h2>
-    <p>Technical articles, tutorials, and personal thoughts on programming and system administration.</p>
+    <h2>Recent Posts</h2>
+    <p class="current-datetime" id="current-datetime"></p>
     {%- if site.posts.size > 0 -%}
       <ul class="post-list">
         {%- for post in site.posts limit:5 -%}
@@ -31,10 +31,6 @@ layout: default
       <p class="view-all"><a href="{{ '/blog/' | relative_url }}">View all blog posts →</a></p>
     {%- endif -%}
   </section>
-
-  <div class="docs-link-section">
-    <p>Looking for technical documentation? <a href="{{ '/generated-docs/' | relative_url }}">View generated docs →</a></p>
-  </div>
 
   {%- if site.paginate -%}
     <div class="pager">
