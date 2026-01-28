@@ -274,6 +274,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCurrentDateTime();
   datetimeIntervalId = setInterval(updateCurrentDateTime, 1000); // Update every second
   
+  // Cleanup interval on page unload
+  window.addEventListener('pagehide', () => {
+    if (datetimeIntervalId) {
+      clearInterval(datetimeIntervalId);
+      datetimeIntervalId = null;
+    }
+  });
+  
   // Mark main content area
   const mainContent = document.querySelector('main, .page-content');
   if (mainContent && !mainContent.id) {

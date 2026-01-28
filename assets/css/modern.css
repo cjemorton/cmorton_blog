@@ -14,6 +14,7 @@
   --card-bg: #ffffff;
   --nav-bg: #333333;
   --nav-text: #ffffff;
+  --muted-text-color: #999999;
   
   /* Compact spacing */
   --spacing-unit: 16px;
@@ -431,7 +432,7 @@ html {
 /* Current datetime display */
 .current-datetime {
   font-size: 0.85em;
-  color: #999;
+  color: var(--muted-text-color);
   text-align: right;
   margin: 0 0 16px 0;
   font-style: italic;
