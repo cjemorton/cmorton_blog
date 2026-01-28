@@ -9,58 +9,31 @@ layout: default
 
   {{ content }}
 
-  <div class="content-sections">
-    
-    <section class="blog-section">
-      <h2>Personal Blog</h2>
-      <p>Technical articles, tutorials, and personal thoughts on programming and system administration.</p>
-      {%- if site.posts.size > 0 -%}
-        <ul class="post-list">
-          {%- for post in site.posts limit:5 -%}
-          <li class="post-list-item">
-            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-            <h3>
-              <a class="post-link" href="{{ post.url | relative_url }}">
-                {{ post.title | escape }}
-              </a>
-            </h3>
-            {%- if post.excerpt -%}
-              <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-            {%- endif -%}
-          </li>
-          {%- endfor -%}
-        </ul>
-        <p class="view-all"><a href="{{ '/blog/' | relative_url }}">View all blog posts →</a></p>
-      {%- endif -%}
-    </section>
+  <section class="blog-section">
+    <h2>Personal Blog</h2>
+    <p>Technical articles, tutorials, and personal thoughts on programming and system administration.</p>
+    {%- if site.posts.size > 0 -%}
+      <ul class="post-list">
+        {%- for post in site.posts limit:5 -%}
+        <li class="post-list-item">
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+          <h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          {%- if post.excerpt -%}
+            <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          {%- endif -%}
+        </li>
+        {%- endfor -%}
+      </ul>
+      <p class="view-all"><a href="{{ '/blog/' | relative_url }}">View all blog posts →</a></p>
+    {%- endif -%}
+  </section>
 
-    <section class="docs-section">
-      <h2>Generated Documentation</h2>
-      <p>AI-assisted technical documentation and guides.</p>
-      {%- if site.docs.size > 0 -%}
-        <ul class="doc-list">
-          {%- for doc in site.docs limit:5 -%}
-          <li class="doc-list-item">
-            {%- if doc.date -%}
-            <span class="doc-meta">{{ doc.date | date: "%b %-d, %Y" }}</span>
-            {%- endif -%}
-            <h3>
-              <a class="doc-link" href="{{ doc.url | relative_url }}">
-                {{ doc.title | escape }}
-              </a>
-            </h3>
-            {%- if doc.excerpt -%}
-              <p>{{ doc.excerpt | strip_html | truncatewords: 30 }}</p>
-            {%- endif -%}
-          </li>
-          {%- endfor -%}
-        </ul>
-        <p class="view-all"><a href="{{ '/generated-docs/' | relative_url }}">View all documentation →</a></p>
-      {%- else -%}
-        <p>No documentation yet. Check back soon!</p>
-      {%- endif -%}
-    </section>
-
+  <div class="docs-link-section">
+    <p>Looking for technical documentation? <a href="{{ '/generated-docs/' | relative_url }}">View generated docs →</a></p>
   </div>
 
   {%- if site.paginate -%}

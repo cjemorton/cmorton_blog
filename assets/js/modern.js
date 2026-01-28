@@ -1,112 +1,8 @@
 // Modern JavaScript for CMORTON Blog
-// ES6+ features for theme switching, PWA, and responsive navigation
+// ES6+ features for responsive navigation
 
-// Theme Switcher
-class ThemeSwitcher {
-  constructor() {
-    this.currentTheme = localStorage.getItem('theme') || 'light';
-    this.init();
-  }
-
-  init() {
-    // Apply saved theme
-    document.documentElement.setAttribute('data-theme', this.currentTheme);
-    
-    // Create theme switcher if it doesn't exist
-    if (!document.querySelector('.theme-switcher')) {
-      this.createThemeSwitcher();
-    }
-    
-    // Set up event listeners
-    this.setupEventListeners();
-  }
-
-  createThemeSwitcher() {
-    // Check if footer theme switcher container exists
-    const footerContainer = document.getElementById('footer-theme-switcher');
-    if (footerContainer) {
-      this.createFooterThemeSwitcher(footerContainer);
-    } else {
-      // Fallback: create floating theme switcher if footer container not found
-      this.createFloatingThemeSwitcher();
-    }
-  }
-
-  createFooterThemeSwitcher(container) {
-    const themes = [
-      { name: 'light', icon: '☀️', label: 'Light theme' },
-      { name: 'dark', icon: '🌙', label: 'Dark theme' },
-      { name: 'blue', icon: '🌊', label: 'Blue theme' },
-      { name: 'compact', icon: '📐', label: 'Compact theme' },
-      { name: 'readability', icon: '📖', label: 'Readability theme' }
-    ];
-    
-    themes.forEach(theme => {
-      const button = document.createElement('button');
-      button.className = 'theme-btn ' + (theme.name === this.currentTheme ? 'active' : '');
-      button.setAttribute('data-theme', theme.name);
-      button.setAttribute('aria-label', theme.label);
-      button.setAttribute('title', theme.label);
-      button.innerHTML = `<span class="theme-icon" aria-hidden="true">${theme.icon}</span><span class="theme-name">${theme.label}</span>`;
-      container.appendChild(button);
-    });
-  }
-
-  createFloatingThemeSwitcher() {
-    const switcher = document.createElement('div');
-    switcher.className = 'theme-switcher';
-    switcher.setAttribute('role', 'group');
-    switcher.setAttribute('aria-label', 'Theme switcher');
-    
-    const themes = [
-      { name: 'light', icon: '☀️', label: 'Light theme' },
-      { name: 'dark', icon: '🌙', label: 'Dark theme' },
-      { name: 'blue', icon: '🌊', label: 'Blue theme' },
-      { name: 'compact', icon: '📐', label: 'Compact theme' },
-      { name: 'readability', icon: '📖', label: 'Readability theme' }
-    ];
-    
-    themes.forEach(theme => {
-      const button = document.createElement('button');
-      button.className = theme.name === this.currentTheme ? 'active' : '';
-      button.setAttribute('data-theme', theme.name);
-      button.setAttribute('aria-label', theme.label);
-      button.setAttribute('title', theme.label);
-      const icon = document.createElement('span');
-      icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = theme.icon;
-      button.appendChild(icon);
-      switcher.appendChild(button);
-    });
-    
-    document.body.appendChild(switcher);
-  }
-
-  setupEventListeners() {
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('.theme-switcher button') || 
-          e.target.matches('.theme-btn') ||
-          e.target.closest('.theme-btn')) {
-        const button = e.target.closest('.theme-btn') || e.target;
-        const theme = button.dataset.theme || button.getAttribute('data-theme');
-        if (theme) {
-          this.switchTheme(theme);
-        }
-      }
-    });
-  }
-
-  switchTheme(theme) {
-    this.currentTheme = theme;
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    
-    // Update active button (both footer and floating switchers)
-    document.querySelectorAll('.theme-switcher button, .theme-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.theme === theme);
-    });
-  }
-}
+// Set compact theme as default (no switching)
+document.documentElement.setAttribute('data-theme', 'compact');
 
 // Mobile Navigation
 class MobileNav {
@@ -232,73 +128,7 @@ class LazyLoader {
   }
 }
 
-// PWA Service Worker Registration
-class PWAManager {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        this.registerServiceWorker();
-      });
-    }
-    
-    // Listen for install prompt
-    this.setupInstallPrompt();
-  }
-
-  async registerServiceWorker() {
-    try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
-      console.log('Service Worker registered:', registration.scope);
-      
-      // Check for updates
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        newWorker.addEventListener('statechange', () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            // New service worker available
-            this.showUpdateNotification();
-          }
-        });
-      });
-    } catch (error) {
-      console.log('Service Worker registration failed:', error);
-    }
-  }
-
-  setupInstallPrompt() {
-    let deferredPrompt;
-    
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      this.showInstallButton(deferredPrompt);
-    });
-  }
-
-  showInstallButton(deferredPrompt) {
-    // You can create a custom install button here
-    console.log('PWA install available');
-  }
-
-  showUpdateNotification() {
-    // Create a non-intrusive update banner
-    const banner = document.createElement('div');
-    banner.className = 'update-banner';
-    banner.innerHTML = `
-      <p>A new version is available!</p>
-      <button onclick="window.location.reload()">Update Now</button>
-      <button onclick="this.parentElement.remove()">Later</button>
-    `;
-    banner.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--accent-color);color:white;padding:16px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:9999;display:flex;gap:12px;align-items:center;';
-    document.body.appendChild(banner);
-  }
-}
-
-// Print Handler
+// Print Handler - small unobtrusive button at bottom
 class PrintHandler {
   constructor() {
     this.init();
@@ -312,16 +142,14 @@ class PrintHandler {
 
   addPrintButtons() {
     // Find article content areas (posts, pages, docs, projects)
-    const contentAreas = document.querySelectorAll('.post-content, .page-content article, .doc-content, .project-content');
+    const articles = document.querySelectorAll('.post, .page, article.doc, article.project');
     
-    contentAreas.forEach(content => {
+    articles.forEach(article => {
       // Check if print button already exists
-      if (!content.querySelector('.print-button')) {
+      if (!article.querySelector('.print-button')) {
         const printBtn = this.createPrintButton();
-        // Insert at the beginning of the content
-        if (content.parentElement) {
-          content.parentElement.insertBefore(printBtn, content);
-        }
+        // Insert at the end of the article
+        article.appendChild(printBtn);
       }
     });
   }
@@ -329,12 +157,8 @@ class PrintHandler {
   createPrintButton() {
     const button = document.createElement('button');
     button.className = 'print-button';
-    button.setAttribute('aria-label', 'Print this article');
-    const icon = document.createElement('span');
-    icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = '🖨️ ';
-    button.appendChild(icon);
-    button.appendChild(document.createTextNode('Print Article'));
+    button.setAttribute('aria-label', 'Print this page');
+    button.textContent = '🖨️ Print';
     return button;
   }
 
@@ -352,40 +176,13 @@ class PrintHandler {
   }
 }
 
-// Skeleton Loader
-class SkeletonLoader {
-  static show(container) {
-    container.classList.add('skeleton');
-  }
-
-  static hide(container) {
-    container.classList.remove('skeleton');
-  }
-
-  static createTextSkeleton(lines = 3) {
-    const skeleton = document.createElement('div');
-    for (let i = 0; i < lines; i++) {
-      const line = document.createElement('div');
-      line.className = 'skeleton skeleton-text';
-      skeleton.appendChild(line);
-    }
-    return skeleton;
-  }
-}
-
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize theme switcher
-  new ThemeSwitcher();
-  
   // Initialize mobile navigation
   new MobileNav();
   
   // Initialize lazy loading
   new LazyLoader();
-  
-  // Initialize PWA
-  new PWAManager();
   
   // Initialize print handler
   new PrintHandler();

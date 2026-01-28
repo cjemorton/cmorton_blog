@@ -18,11 +18,11 @@
 
         <div class="trigger">
           <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
-          <a class="page-link" href="{{ '/blog/' | relative_url }}">Personal Blog</a>
-          <a class="page-link" href="{{ '/generated-docs/' | relative_url }}">Generated Docs</a>
+          <a class="page-link" href="{{ '/blog/' | relative_url }}">Blog</a>
+          <a class="page-link" href="{{ '/generated-docs/' | relative_url }}">Docs</a>
           {%- for path in page_paths -%}
             {%- assign my_page = site.pages | where: "path", path | first -%}
-            {%- if my_page.title and my_page.show_in_nav != false -%}
+            {%- if my_page.title and my_page.show_in_nav != false and my_page.title != "About" -%}
             <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
             {%- endif -%}
           {%- endfor -%}
