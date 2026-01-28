@@ -54,10 +54,10 @@ This report documents a comprehensive analysis of the cmorton_blog Jekyll site f
 - **jekyll-feed**: ~0.12 (Released 2019)
 
 ### Recommended Updates:
-- **Jekyll**: Update to ~4.3.0 (Latest stable, better performance, security fixes)
+- **Jekyll**: Update to ~4.3.0 (4.3.4 installed, latest stable)
 - **Minima theme**: Update to ~2.5 (Keep current for stability; v3.0 requires significant changes)
-- **jekyll-feed**: Update to ~0.17 (Latest compatible with GitHub Pages)
-- **NEW:** jekyll-seo-tag ~2.8 (Modern SEO support)
+- **jekyll-feed**: Update to ~0.17 (0.17.0 installed, latest compatible with GitHub Pages)
+- **NEW:** jekyll-seo-tag ~2.8 (2.8.0 installed, modern SEO support)
 
 ### Update Status:
 - ✓ **UPDATED:** Gemfile with latest compatible versions
@@ -212,11 +212,13 @@ Configuration file: _config.yml
 ### Files Modified:
 1. **_config.yml** - Updated URL to HTTPS, added SEO configuration, added jekyll-seo-tag
 2. **Gemfile** - Updated Jekyll and plugin versions, added jekyll-seo-tag
-3. **_posts/2020/03/2020-03-12-torrent-manager-building-a-useful-perl-module-coding-the-module.md** - Fixed 2 spelling errors
-4. **_posts/2020/03/2020-03-20-Cookbook.Ruby.md** - Fixed typo in code comment
-5. **_posts/2021/12/2021-12-11-notes-on-freebsd-ports-patching.md** - Fixed spelling error
-6. **SECURITY.md** - Fixed 2 grammar/spelling errors
-7. **about.markdown** - Added affiliate disclosure
+3. **Gemfile.lock** - Updated dependency lockfile
+4. **.gitignore** - Added .bundle/ directory to ignore list
+5. **_posts/2020/03/2020-03-12-torrent-manager-building-a-useful-perl-module-coding-the-module.md** - Fixed 2 spelling errors
+6. **_posts/2020/03/2020-03-20-Cookbook.Ruby.md** - Fixed typo in code comment
+7. **_posts/2021/12/2021-12-11-notes-on-freebsd-ports-patching.md** - Fixed spelling error
+8. **SECURITY.md** - Fixed 2 grammar/spelling errors
+9. **about.markdown** - Added affiliate disclosure
 
 ### Files Created:
 1. **SITE_ANALYSIS_REPORT.md** - This comprehensive analysis document
@@ -267,7 +269,7 @@ The site follows Jekyll best practices and is fully compatible with GitHub Pages
 ---
 
 **Report Generated:** January 28, 2026  
-**Tools Used:** aspell, Jekyll 4.3, yamllint, custom analysis scripts  
+**Tools Used:** aspell, Jekyll 4.3.4, yamllint, custom analysis scripts  
 **Total Files Analyzed:** 15+ markdown/HTML files, configuration files, and assets  
 **Issues Found:** 6 spelling/grammar errors, 1 security configuration issue, multiple modernization opportunities  
 **Issues Fixed:** All critical errors corrected, key modernization features implemented
